@@ -1,22 +1,30 @@
+
 class Employee {
-    constructor(name, id, email) {
-        this.name = name;
-        this.id = id;
-        this.email = email;
+    constructor(options) {
+       this.options = {};
+       Object.keys(this.defaults).forEach(key => this.options[key] = options[key] || this.defaults[key]);
+    };
+    get defaults() {
+        return {
+            name: 'no name',
+           id: 'no ID',
+           email: 'no email'
+        };
     };
     getName() {
-        return this.name;
+        return this.options.name;
     };
     getId() {
-        return this.id;
+        return this.options.id;
     };
     getEmail() {
-        return this.email;
+        return this.options.email;
     };
     getRole() {
         return this.constructor.name;
     };
 };
+
 
 
 module.exports = Employee
