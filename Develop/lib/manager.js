@@ -1,6 +1,6 @@
-const employee = require('./Employee')
+const Employee = require('./Employee')
 
-class Manager extends employee {
+class Manager extends Employee {
     get defaults() {
         return {
             ...super.defaults,

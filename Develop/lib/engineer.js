@@ -1,9 +1,9 @@
-const employee = require('./Employee')
+const Employee = require('./Employee')
 
-class Engineer extends employee {
+class Engineer extends Employee {
    get defaults() {
        return {
-            ...super.options,
+            ...super.defaults,
             github: 'no github'
        };
    };

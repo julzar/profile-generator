@@ -1,9 +1,9 @@
-const employee = require('./Employee')
+const Employee = require('./Employee')
 
-class Intern extends employee {
+class Intern extends Employee {
     get defaults() {
         return {
-            ...super.options,
+            ...super.defaults,
             school: 'no school'
         };
     };
