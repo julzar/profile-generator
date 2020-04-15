@@ -3,6 +3,8 @@ const Engineer = require("./lib/Engineer");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const teamQuestions = require('./lib/questions');
+const fs = require('fs');
+const generateMarkup = require('./templates/markup');
 
 const team = [];
 
@@ -14,6 +16,7 @@ function ask(question) {
 
 async function role(choice) {
     let roleInfo;
+    
     if (choice.confirm) {
         try {
             roleInfo = await ask(teamQuestions.chooseRole);
@@ -68,19 +71,27 @@ async function addNewMember(confirm) {
     }
 };
 
+const loop = function(teamData) {
+    let markup = ``;
+    teamData.forEach( member => { markup = markup + member.renderInfo() } );
+    return markup;
+};
+
 async function buildTeam() {
     try {
         team.push(new Manager(await ask(teamQuestions.managerInfo)));
-        await addNewMember(await ask(teamQuestions.newMember))
-        console.log(`Complete! Your team contains the following members:`);
-        team.forEach(member => console.log(member));
+        await addNewMember(await ask(teamQuestions.newMember));
+        fs.writeFile('./output/team.html', generateMarkup(loop(team)), (err) => { 
+            if (err) { 
+                throw (err) 
+            } 
+            else { 
+                console.log(`Success! Team rendered to ./output/team.html`) 
+            } 
+        });
     } 
     catch(err) {
         throw(err)
     }
 };
 buildTeam();
-
-
-
-
