@@ -2,12 +2,12 @@ const teamQuestions = {
     // start: {
     //     type: 'confirm',
     //     name: 'confirm',
-    //     message: 'Build team?'
+    //     message: 'Build your team! Teams have a manager + any number of engineers/interns.'
     // },
 
     newMember: {
         type: 'confirm',
-        name: 'confirm',
+        name: 'confirmed',
         message: 'Add another team member?'
     },
 

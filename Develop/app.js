@@ -6,38 +6,33 @@ const teamQuestions = require('./lib/questions');
 const fs = require('fs');
 const generateMarkup = require('./templates/markup');
 
+// Will hold each team member object
 const team = [];
 
-
-function ask(question) {
-   return inquirer.prompt(question)
+// Returns some object based on how the user responds to the question(s) passed in
+async function ask(question) {
+   return await inquirer.prompt(question)
 };
 
-
-async function role(choice) {
-    let roleInfo;
+// Prompts user to choose 'engineer' or 'intern', returns an object { role: '(user's choice)' }
+async function chooseRole() {
+    let roleChoice;
     
-    if (choice.confirm) {
         try {
-            roleInfo = await ask(teamQuestions.chooseRole);
+            roleChoice = await ask(teamQuestions.chooseRole);
         }
         catch(err) {
             throw(err);
         };
-    } 
-    else {
-        return;
-    };
-    return roleInfo;
+    
+    return roleChoice;
 };
 
-async function memberData(data) {
+// Takes chooseRole() output object as argument. Returns new Engineer/Intern object with options based on prompt responses
+async function newMember(roleChoice) {
     let teamMember;
 
-    if (data === undefined) {
-        return;
-    }
-    else if (data.role === 'Engineer') {
+    if (roleChoice.role === 'Engineer') {
         try {
             teamMember = new Engineer(await ask(teamQuestions.engineerInfo))
         }
@@ -53,13 +48,16 @@ async function memberData(data) {
             throw(err)
         };
     }
+
     return teamMember;
 };
 
+// Recursive function that takes object with a true/false value { confirmed: (True/False) } as argument. 
+// If true, Creates a new team member based on prompt responses and pushes it to the teams array. If false, stops the app.
 async function addNewMember(confirm) {
-    if (confirm.confirm) {
+    if (confirm.confirmed) {
         try {
-            team.push(await memberData(await role(confirm)));
+            team.push(await newMember(await chooseRole()));
             await addNewMember(await ask(teamQuestions.newMember));
         }
         catch(err) {
@@ -71,12 +69,14 @@ async function addNewMember(confirm) {
     }
 };
 
-const loop = function(teamData) {
+// Calls the renderInfo() method for each team member in the team array. Returns a string of all the outputs
+function loop(teamData) {
     let markup = ``;
-    teamData.forEach( member => { markup = markup + member.renderInfo() } );
+    teamData.forEach( member => { markup += member.renderInfo() } );
     return markup;
 };
 
+// Main function that calls addNewMember() and writes the team.html file with the info for each team member
 async function buildTeam() {
     try {
         team.push(new Manager(await ask(teamQuestions.managerInfo)));
