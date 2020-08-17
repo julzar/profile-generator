@@ -38,7 +38,7 @@ Navigate to the /Develop folder in the terminal, and run "node app.js" to start 
 
 ## Tests
 
-No information about tests yet.
+Used Jest to test constructor arguments and methods for the different employee classes.
 
 - - -
 
