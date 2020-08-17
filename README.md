@@ -26,13 +26,13 @@ A Node.js app for creating simple html profile cards for a dev team. The team wi
 
 ## Installation
 
-Clone the repository and run "npm install".
+Clone the repository, navigate to the /Develop folder in the termial, and run "npm install".
 
 - - -
 
 ## Usage
 
-Run "node app.js" in the termial to start the app, and then simply follow the prompts. Your team can be as large as you want. Once you are done adding members, go the the output folder and open the team.html file in the browser to see your team's profile cards.
+Navigate to the /Develop folder in the terminal, and run "node app.js" to start the app. Then simply follow the prompts. Your team can be as large as you want. Once you are done adding members, go the the output folder and open the team.html file in the browser to see your team's profile cards.
 
 - - -
 
