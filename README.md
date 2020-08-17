@@ -1,9 +1,9 @@
-# Homework-10-template-engine (Team Profile Generator)
+# Template-engine (Team Profile Generator)
 
     
 ## Description
 
-A nodejs app for creating simple html profile cards for a dev team. The team will always consist of one manager, and any number of engineers/interns. Each team member will have a name, id and email. In addition, the manager will have an office number, the engineers will have a github profile name, and the interns a school.
+A Node.js app for creating simple html profile cards for a dev team. The team will always consist of one manager, and any number of engineers/interns. Each team member will have a name, id and email. In addition, the manager will have an office number, the engineers will have a github profile name, and the interns a school.
 
 - - -
 
